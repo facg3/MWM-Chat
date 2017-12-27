@@ -1,0 +1,25 @@
+{
+  "name": "mwm-chat",
+  "version": "1.0.0",
+  "description": "this is room chat project for express week",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/facg3/MWM-Chat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/facg3/MWM-Chat/issues"
+  },
+  "homepage": "https://github.com/facg3/MWM-Chat#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "path": "^0.12.7"
+  }
+}
