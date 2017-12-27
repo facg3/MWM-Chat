@@ -13,7 +13,7 @@ router.get('/', login.get);
 router.post('/login', login.post);
 router.get('/register', register.get);
 router.get('/roomChat', roomChat.get);
-// router.use(error.client);
-// router.use(error.server);
+router.use(error.client);
+router.use(error.server);
 
 module.exports = router;

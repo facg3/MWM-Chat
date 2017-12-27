@@ -18,7 +18,7 @@ app.engine(
     defaultLayout: 'main'
   })
 );
-
+app.use(express.static(path.join(__dirname,'..','public')));
 app.set('port', process.env.PORT || 8000);
 app.use(routes);
 
