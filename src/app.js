@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const favicon = require('serve-favicon');
 
 const routes = require('./controllers/routes');
 
@@ -18,7 +19,8 @@ app.engine(
     defaultLayout: 'main'
   })
 );
-
+app.use(favicon(path.join(__dirname, '..','public','icon.ico')));
+app.use(express.static(path.join(__dirname, '..','public')));
 app.set('port', process.env.PORT || 8000);
 app.use(routes);
 
