@@ -8,8 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 
-INSERT INTO users(email, username, password) VALUES('negmah@hotmail.com', 'Marwa', '123456');
-
 CREATE TABLE IF NOT EXISTS posts (
   id         serial       PRIMARY KEY,
   users_id  integer  REFERENCES users(id),
@@ -17,7 +15,6 @@ CREATE TABLE IF NOT EXISTS posts (
   message    varchar(100) NOT NULL
 );
 
-INSERT INTO posts(users_id, username, message)VALUES(1, 'Marwa', 'WELCOME');
 
 
 COMMIT;

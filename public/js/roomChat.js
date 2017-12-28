@@ -34,6 +34,35 @@ function showMessage(cb) {
   });
 
 }
+function showAllMessages(cb) {
+  fetch('/messages', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include'
+  })
+  .then((response) => {
+     cb(null,response.blob());
+  })
+  .catch((err) => {
+    cb(err)
+  });
+
+}
+
+setInterval(()=>{
+  showAllMessages((err,response) => {
+    console.log('a');
+    console.log(response.body);
+    if (!err) {
+      console.log('aaaa',response);
+    }
+});
+},3000);
+
+
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
 }

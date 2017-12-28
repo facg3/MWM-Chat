@@ -30,6 +30,23 @@ exports.get = (req, res) => {
     });
   }
 };
+exports.getMessages = (req, res) => {
+  const cookie = req.cookies.accessToken;
+  if (cookie === undefined) {
+    res.render('login', {
+      activePage: {
+        login: true
+      }
+    });
+  } else {
+    queries.allPost((err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(JSON.stringify({ posts: result }));
+    });
+  }
+};
 
 exports.post = (req, res) => {
   const cookie = req.cookies.accessToken;
