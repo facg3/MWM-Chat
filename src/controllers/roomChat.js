@@ -33,7 +33,6 @@ exports.get = (req, res) => {
 
 exports.post = (req, res) => {
   const cookie = req.cookies.accessToken;
-
   const verifyCookie = jwt.verify(cookie, process.env.SECRET_COOKIE)
   const dataMessage = {
     message: req.body.message,
