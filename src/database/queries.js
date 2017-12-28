@@ -23,10 +23,8 @@ const allPost = (callback) => {
   const sql = 'SELECT * FROM posts';
   connection.query(sql, (errPosts, result) => {
     if (errPosts) {
-      console.log(errPosts);
       callback(errPosts);
     } else {
-      console.log("qqqqqqq",result.rows);
       callback(null,result.rows);
     }
   });

@@ -14,8 +14,8 @@ router.post('/loginuser', login.post);
 router.get('/register', register.get);
 router.post('/register/user', register.post);
 router.get('/roomChat', roomChat.get);
-router.post('/message',roomChat.post);
-// router.use(error.client);
-// router.use(error.server);
+router.post('/roomChat',roomChat.post);
+router.use(error.client);
+router.use(error.server);
 
 module.exports = router;
