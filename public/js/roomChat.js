@@ -9,14 +9,13 @@ function sendMassage(message,cb) {
     credentials: 'include'
   })
   .then((response) => {
-     cb(response);
+     cb('/roomChat');
   })
   .catch( (err) => {
     console.log(err);
   });
 
 }
-
 
 function showMessage(cb) {
   fetch('/roomChat', {
@@ -34,4 +33,11 @@ function showMessage(cb) {
     console.log(err);
   });
 
+}
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
 }

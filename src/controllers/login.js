@@ -10,7 +10,9 @@ exports.get = (req, res) => {
 exports.post = (req, res) => {
   const dataUser = req.body;
   queries.passwordUserFromDb(dataUser, (err, result, data) => {
-    if (err) console.log(err);
+    if (err){
+      res.status(401).send();
+    }
     else {
       if (result) {
         const userData = {

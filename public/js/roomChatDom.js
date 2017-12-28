@@ -9,7 +9,12 @@ function allwork() {
   sendMassage(JSON.stringify(dataMessage),(err,response) =>{
     console.log(response);
     if (response.status ===200) {
-      location.reload();
+      showMessage((err,response)=>{
+        if (response) {
+          location.reload()
+
+        }
+      })
     }
   })
   showMessage((err,response)=>{

@@ -10,11 +10,15 @@ const passwordUserFromDb = (dataUser,cb) =>{
       cb(errInPasswordUser);
     }
     else {
+      if (result.rows.length===0) {
+        cb(errInPasswordUser)
+      }
+      else {
       const passwordFromDB = result.rows[0].password;
       const passwordFromUser = dataUser.password;
       const passwordCom = bcrypt.compareSync(passwordFromUser,passwordFromDB);
       cb(null,passwordCom,result.rows);
-    }
+    }}
   })
 }
 
