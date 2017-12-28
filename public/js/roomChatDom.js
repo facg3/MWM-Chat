@@ -1,8 +1,10 @@
 const btn = document.getElementById('btn');
 let message = document.getElementById('message');
-const divChat = document.getElementById('room');
-window.scrollTo(0,document.querySelector("li").scrollHeight);
-function allwork() {
+const divChat = document.querySelector('.room');
+const chatForm = document.getElementById('chatForm');
+divChat.scrollTo(0,divChat.scrollHeight);
+function allwork(e) {
+  e.preventDefault();
   const dataMessage = {
     message : message.value
   }
@@ -21,11 +23,7 @@ function allwork() {
     location.reload();
   })
 }
-btn.addEventListener('click', event => {
-  allwork();
-});
-function pressEnter() {
-  if(event.keyCode == 13 ){
-    allwork();
-  }
+
+if (chatForm) {
+  chatForm.addEventListener('submit', allwork);
 }
