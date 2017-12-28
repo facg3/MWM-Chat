@@ -44,7 +44,9 @@ function showAllMessages(cb) {
     credentials: 'include'
   })
   .then((response) => {
-     cb(null,response.blob());
+     return response.json();
+  }).then((res)=>{
+    cb(null,res)
   })
   .catch((err) => {
     cb(err)
@@ -53,11 +55,15 @@ function showAllMessages(cb) {
 }
 
 setInterval(()=>{
-  showAllMessages((err,response) => {
-    console.log('a');
-    console.log(response.body);
-    if (!err) {
-      console.log('aaaa',response);
+  showAllMessages((err,{ posts }) => {
+    if (posts) {
+      const room = document.querySelector('.room ul');
+      room.innerHTML = posts.reduce((acc, post)=>{
+        acc += `<li>${post.username } : ${post.message}</li>`;
+        return acc;
+      },'');
+
+
     }
 });
 },3000);
