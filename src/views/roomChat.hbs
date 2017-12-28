@@ -6,7 +6,7 @@
   <p><span onclick="openNav()" class="span">&#9776;</span></p>
 <div class="containerChat">
   <h1>MWM Room Chat </h1>
-  <h2>Hello {{data.username}}</h2>
+  <h2>Hello : <span id='usernameChat'>{{data.username}}</span></h2>
   <div class="room">
     <ul>
     {{#each posts}}
@@ -17,7 +17,7 @@
   <div class="chats">
     <form class="" action="" method="post" onkeyup="pressEnter()">
       <input type="text" id='message' placeholder="Write Your Message">
-      <button type="button" name="send" id="btn" >Send</button>
+      <center><button type="button" class="send" id="btn" >Send</button></center>
     </form>
   </div>
 </div>

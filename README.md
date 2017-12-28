@@ -11,26 +11,31 @@
 
  - Clone the repo:
 
- SSH  
+ SSH 
+ ```
    git@github.com:facg3/MWM-Shop_Project.git
+```
 
- Http   
+ Http 
+ ```
    https://github.com/facg3/MWM-Shop_Project.git
+```
 
  - Install the node.js devDependencies:
-
+```
  npm install
-
+```
  - Run the (module) Tests
-
+```
  npm test
-
+```
  - Run the Server with Nodemon
-
+```
  npm run watch
+```
 
 # Schema Diagram
-![schema](/home/marwa/Pictures/schema.png)
+![schema](https://scontent.fjrs2-1.fna.fbcdn.net/v/t34.0-12/26105707_885360958306782_1471724217_n.png?oh=01004adf6ecce7d60e68ba76c1c456be&oe=5A4730C6)
 
 
 
