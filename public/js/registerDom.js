@@ -17,11 +17,11 @@ function allwork() {
       username: username.value,
       password: password.value,
     };
-    login(JSON.stringify(dataToSend), result => {
-      p.textContent = result;
-      div.appendChild(p);
+    register(JSON.stringify(dataToSend), result => {
+      if (result.status===200) {
+        window.location.pathname='/';
+      }
     });
-    p.textContent = '';
   }
 }
 btn.addEventListener('click', event => {

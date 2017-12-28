@@ -1,4 +1,5 @@
-const connection = require("./dbconnection");
+const connection = require("./dbConnection");
+const bcrypt = require('bcrypt');
 
 const login = (dataUser,callback) => {
   const sql = {text:`SELECT * FROM users WHERE username = $1 AND password = $2`,values:[dataUser.name,dataUser.password]}
@@ -25,7 +26,26 @@ const allPost = (callback) => {
   });
 };
 
+const register=(data,callback)=>{
+  var salt=bcrypt.genSaltSync(10);
+  const passwordHash = bcrypt.hashSync(data.password,salt);
+  const sql = {
+  text: "INSERT INTO users (username,password,email) VALUES ($1,$2,$3)",
+  values: [`${data.username}`, `${passwordHash}`, `${data.email}`]}
+  connection.query(sql, (errRegister) => {
+    if (errRegister) {
+      console.log(errRegister);
+      callback(errRegister);
+    } else {
+      callback(true);
+    }
+  });
+}
 module.exports = {
   login,
-  allPosts
+  allPost,
+  register
 };
+// console.log('hre  is password hashed ',passwordHash);
+// const passwordcom=bcrypt.compareSync(data.password,passwordHash);
+// console.log('here is password ',passwordcom);

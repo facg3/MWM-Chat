@@ -4,5 +4,6 @@ exports.get = (req, res) => {
 
 
 exports.post = (req, res) => {
+  
   res.render('roomChat', { activePage: { roomChat: true } });
 };
