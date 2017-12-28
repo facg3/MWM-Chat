@@ -13,6 +13,21 @@ const login = (dataUser,callback) => {
   })
 };
 
+const passwordUserFromDb = (dataUser,cb) =>{
+  const sql = {text:`SELECT password FROM users WHERE username= 'mahmoud'`};
+  connection.query(sql,(errInPasswordUser,result) =>{
+    if (errInPasswordUser) {
+      cb(errInPasswordUser);
+    }
+    else {
+      const passwordFromDB = result.rows[0].password;
+      const passwordFromUser = dataUser.password;
+      const passwordCom = bcrypt.compareSync(passwordFromUser,passwordFromDB);
+      cb(null,passwordCom);
+    }
+  })
+}
+
 
 const allPost = (callback) => {
   const sql = 'SELECT * FROM posts';
@@ -34,18 +49,16 @@ const register=(data,callback)=>{
   values: [`${data.username}`, `${passwordHash}`, `${data.email}`]}
   connection.query(sql, (errRegister) => {
     if (errRegister) {
-      console.log(errRegister);
-      callback(errRegister);
+      callback(errRegister,null);
     } else {
-      callback(true);
+      callback(null,true);
     }
   });
 }
 module.exports = {
   login,
   allPost,
-  register
+  register,
+  passwordUserFromDb
 };
 // console.log('hre  is password hashed ',passwordHash);
-// const passwordcom=bcrypt.compareSync(data.password,passwordHash);
-// console.log('here is password ',passwordcom);

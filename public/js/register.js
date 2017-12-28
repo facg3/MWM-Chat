@@ -1,4 +1,3 @@
-
 function register(data,cb) {
   fetch('/register/user', {
     method: 'POST',
@@ -10,8 +9,7 @@ function register(data,cb) {
     credentials: 'include'
   })
   .then( (response) => {
-    if(response.ok) cb(response);
-    console.log(response);
+    cb(response);
   })
   .catch( (err) => {
     console.log(err);

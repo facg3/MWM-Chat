@@ -10,7 +10,7 @@ const error = require('./error');
 
 
 router.get('/', login.get);
-router.post('/login', login.post);
+router.post('/loginuser', login.post);
 router.get('/register', register.get);
 router.post('/register/user', register.post);
 router.get('/roomChat', roomChat.get);

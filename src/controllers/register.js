@@ -8,11 +8,8 @@ exports.post = (req, res) => {
   const userData=req.body;
   queries.register(userData,(err,result)=>{
     if (err) {
-      console.log(err);
+      return res.status(409).send();
     }
-    else {
-      res.send('/')
-    }
+    return res.send();
   })
-  res.render('login', { activePage: { login: true } });
 };

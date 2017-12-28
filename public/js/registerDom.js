@@ -20,6 +20,9 @@ function allwork() {
     register(JSON.stringify(dataToSend), result => {
       if (result.status===200) {
         window.location.pathname='/';
+      }else {
+        p.textContent = 'User is already exists';
+        div.appendChild(p);
       }
     });
   }
