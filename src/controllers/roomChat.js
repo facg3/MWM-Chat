@@ -1,3 +1,39 @@
+const jwt = require('jsonwebtoken');
+require('env2')('config.env')
+const queries = require('../database/queries');
 exports.get = (req, res) => {
-  res.render('roomChat', { activePage: { roomChat: true } });
+  const cookie = req.cookies.accessToken;
+  const verifyCookie = jwt.verify(cookie,process.env.SECRET_COOKIE)
+  const dataMessage = {
+    message : req.body.message,
+    users_id : verifyCookie.id,
+    username : verifyCookie.username
+  }
+  queries.allPost((err,result)=>{
+    if (err) {
+      console.log('errr',err);
+    }
+
+    res.render('roomChat', { activePage: { register: true },posts:result,data:dataMessage});
+
+  });
 };
+
+exports.post=(req, res)=>{
+  const cookie = req.cookies.accessToken;
+  const verifyCookie = jwt.verify(cookie,process.env.SECRET_COOKIE)
+  const dataMessage = {
+    message : req.body.message,
+    users_id : verifyCookie.id,
+    username : verifyCookie.username
+  }
+  queries.message(dataMessage,(err,result)=>{
+    if (err) {
+      console.log(err);
+    }
+    else {
+          res.render('roomChat', { activePage: { register: true },data:dataMessage});
+    }
+  });
+
+}

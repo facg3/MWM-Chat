@@ -14,9 +14,14 @@ function allwork() {
       username: username.value,
       password: password.value
     };
-    login(JSON.stringify(dataToSend), result => {
-      p.textContent = result;
-      div.appendChild(p);
+    login(JSON.stringify(dataToSend), response => {
+      if(response.status === 200){
+         window.location.pathname='/roomChat'
+      }
+      else{
+        p.textContent = 'username or password is False';
+        div.appendChild(p);
+      }
     });
     p.textContent = '';
   }
