@@ -16,6 +16,7 @@ router.get('/register', register.get);
 router.post('/register/user', register.post);
 router.get('/roomChat', roomChat.get);
 router.post('/roomChat',roomChat.post);
+router.get('/messages',roomChat.getMessages);
 router.get('/logout',logout.get);
 router.use(error.client);
 router.use(error.server);

@@ -1,29 +1,25 @@
 const btn = document.getElementById('btn');
 let message = document.getElementById('message');
-const divChat = document.querySelector('.room');
-const chatForm = document.getElementById('chatForm');
-divChat.scrollTo(0,divChat.scrollHeight);
-function allwork(e) {
-  e.preventDefault();
+const divChat = document.getElementById('room');
+window.scrollTo(0,document.querySelector("li").scrollHeight);
+function allwork() {
   const dataMessage = {
     message : message.value
   }
   sendMassage(JSON.stringify(dataMessage),(err,response) =>{
-    console.log(response);
     if (response.status ===200) {
-      showMessage((err,response)=>{
-        if (response) {
-          location.reload()
-
-        }
-      })
+      location.reload();
     }
   })
   showMessage((err,response)=>{
     location.reload();
   })
 }
-
-if (chatForm) {
-  chatForm.addEventListener('submit', allwork);
+btn.addEventListener('click', event => {
+  allwork();
+});
+function pressEnter() {
+  if(event.keyCode == 13 ){
+    allwork();
+  }
 }
