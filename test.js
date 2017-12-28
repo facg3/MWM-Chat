@@ -1,6 +1,6 @@
-const tape = require('tape');
+const test = require('tape');
 const supertest = require('supertest');
-const app = require('src/app.js');
+const app = require('./src/app.js');
 //Route Test 😜😩
 
 
@@ -12,15 +12,24 @@ test("Initialize", (t)=>  {
   t.end();
 });
 
-
-
-test('All routes should return the expected results', t => {
+test('login test route', t => {
   supertest(app)
-    .get('login/')
+    .get('/login')
     .expect(200)
-    .expect('Content-Type', /json/)
     .end((err, res) => {
-      t.error(err);
+      t.same(res.statusCode,200,'should equal 200');
+      t.error(err, 'No error');
+      t.end();
+    });
+});
+
+test('Register test route', t => {
+  supertest(app)
+    .get('/register')
+    .expect(200)
+    .end((err, res) => {
+      t.same(res.statusCode,200,'should equal 200');
+      t.error(err, 'No error');
       t.end();
     });
 });
