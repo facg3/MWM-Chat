@@ -31,9 +31,7 @@ exports.post=(req, res)=>{
     if (err) {
       console.log(err);
     }
-    else {
-          res.render('roomChat', { activePage: { register: true },data:dataMessage});
-    }
+  
   });
 
 }

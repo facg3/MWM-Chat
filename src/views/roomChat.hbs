@@ -1,6 +1,12 @@
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="/logout">logout</a>
+</div>
+  <p><span onclick="openNav()" class="span">&#9776;</span></p>
 <div class="containerChat">
   <h1>MWM Room Chat </h1>
-  <h2>Hello : {{data.username}}</h2>
+  <h2>Hello {{data.username}}</h2>
   <div class="room">
     <ul>
     {{#each posts}}
@@ -9,7 +15,7 @@
   </ul>
   </div>
   <div class="chats">
-    <form class="" action="/message" method="post">
+    <form class="" action="" method="post" onkeyup="pressEnter()">
       <input type="text" id='message' placeholder="Write Your Message">
       <button type="button" name="send" id="btn" >Send</button>
     </form>
