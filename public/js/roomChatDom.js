@@ -1,6 +1,7 @@
 const btn = document.getElementById('btn');
 let message = document.getElementById('message');
 const divChat = document.getElementById('room');
+window.scrollTo(0,document.querySelector("li").scrollHeight);
 function allwork() {
   const dataMessage = {
     message : message.value
@@ -12,7 +13,7 @@ function allwork() {
     }
   })
   showMessage((err,response)=>{
-    
+    location.reload();
   })
 }
 btn.addEventListener('click', event => {

@@ -3,37 +3,48 @@ require('env2')('config.env')
 const queries = require('../database/queries');
 exports.get = (req, res) => {
   const cookie = req.cookies.accessToken;
-  const verifyCookie = jwt.verify(cookie,process.env.SECRET_COOKIE)
-  const dataMessage = {
-    message : req.body.message,
-    users_id : verifyCookie.id,
-    username : verifyCookie.username
-  }
-  queries.allPost((err,result)=>{
-    if (err) {
-      console.log('errr',err);
+  if (cookie === undefined) {
+    res.render('login', {
+      activePage: {
+        login: true
+      }
+    });
+  } else {
+    const verifyCookie = jwt.verify(cookie, process.env.SECRET_COOKIE)
+    const dataMessage = {
+      message: req.body.message,
+      users_id: verifyCookie.id,
+      username: verifyCookie.username
     }
-
-    res.render('roomChat', { activePage: { register: true },posts:result,data:dataMessage});
-
-  });
+    queries.allPost((err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.render('roomChat', {
+        activePage: {
+          register: true
+        },
+        posts: result,
+        data: dataMessage
+      });
+    });
+  }
 };
 
-exports.post=(req, res)=>{
+exports.post = (req, res) => {
   const cookie = req.cookies.accessToken;
-  const verifyCookie = jwt.verify(cookie,process.env.SECRET_COOKIE)
+
+  const verifyCookie = jwt.verify(cookie, process.env.SECRET_COOKIE)
   const dataMessage = {
-    message : req.body.message,
-    users_id : verifyCookie.id,
-    username : verifyCookie.username
+    message: req.body.message,
+    users_id: verifyCookie.id,
+    username: verifyCookie.username
   }
-  queries.message(dataMessage,(err,result)=>{
+  queries.message(dataMessage, (err, result) => {
     if (err) {
       console.log(err);
     }
-    else {
-          res.render('roomChat', { activePage: { register: true },data:dataMessage});
-    }
+
   });
 
 }

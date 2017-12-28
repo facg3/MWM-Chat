@@ -1,5 +1,5 @@
 function sendMassage(message,cb) {
-  fetch('/message', {
+  fetch('/roomChat', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
