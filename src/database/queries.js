@@ -1,20 +1,10 @@
 const connection = require("./dbConnection");
 const bcrypt = require('bcrypt');
 
-const login = (dataUser,callback) => {
-  const sql = {text:`SELECT * FROM users WHERE username = $1 AND password = $2`,values:[dataUser.name,dataUser.password]}
-  connection.query(sql, (errUsers, result) => {
-    if (errUsers) {
-      console.log(errUsers);
-      callback(errUsers);
-    } else {
-      callback(result.rows);
-    }
-  })
-};
+
 
 const passwordUserFromDb = (dataUser,cb) =>{
-  const sql = {text:`SELECT password FROM users WHERE username= 'mahmoud'`};
+  const sql = {text:`SELECT * FROM users WHERE username= $1` , values : [dataUser.username]};
   connection.query(sql,(errInPasswordUser,result) =>{
     if (errInPasswordUser) {
       cb(errInPasswordUser);
@@ -23,7 +13,7 @@ const passwordUserFromDb = (dataUser,cb) =>{
       const passwordFromDB = result.rows[0].password;
       const passwordFromUser = dataUser.password;
       const passwordCom = bcrypt.compareSync(passwordFromUser,passwordFromDB);
-      cb(null,passwordCom);
+      cb(null,passwordCom,result.rows);
     }
   })
 }
@@ -36,10 +26,24 @@ const allPost = (callback) => {
       console.log(errPosts);
       callback(errPosts);
     } else {
-      callback(result.rows);
+      console.log("qqqqqqq",result.rows);
+      callback(null,result.rows);
     }
   });
 };
+
+const message = (dataMessage,callback) =>{
+  const sql = {
+    text:"INSERT INTO posts (users_id ,username,message) VALUES ($1,$2,$3)",
+    values : [`${dataMessage.users_id}`,`${dataMessage.username}`,`${dataMessage.message}`]}
+    connection.query(sql, (errMessage) => {
+      if (errMessage) {
+        callback(errMessage,null);
+      } else {
+        callback(null,true);
+      }
+    });
+}
 
 const register=(data,callback)=>{
   var salt=bcrypt.genSaltSync(10);
@@ -56,9 +60,9 @@ const register=(data,callback)=>{
   });
 }
 module.exports = {
-  login,
   allPost,
   register,
-  passwordUserFromDb
+  passwordUserFromDb,
+  message
 };
 // console.log('hre  is password hashed ',passwordHash);

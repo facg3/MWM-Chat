@@ -1,0 +1,19 @@
+<div class="containerChat">
+  <h1>MWM Room Chat </h1>
+  <h2>Hello : {{data.username}}</h2>
+  <div class="room">
+    <ul>
+    {{#each posts}}
+      <li>{{this.username }} : {{message}}</li>
+    {{/each}}
+  </ul>
+  </div>
+  <div class="chats">
+    <form class="" action="/message" method="post">
+      <input type="text" id='message' placeholder="Write Your Message">
+      <button type="button" name="send" id="btn" >Send</button>
+    </form>
+  </div>
+</div>
+<script src="js/roomChat.js" charset="utf-8"></script>
+<script src="js/roomChatDom.js" charset="utf-8"></script>
