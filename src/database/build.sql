@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS posts (
   id         serial       PRIMARY KEY,
   users_id  integer  REFERENCES users(id),
   username  varchar(100) REFERENCES users(username),
-  message    varchar(100) NOT NULL
+  message   text NOT NULL
 );
 
 

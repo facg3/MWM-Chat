@@ -1,25 +1,30 @@
-const btn = document.getElementById('btn');
 let message = document.getElementById('message');
-const divChat = document.getElementById('room');
-window.scrollTo(0,document.querySelector("li").scrollHeight);
+let chatForm = document.getElementById('chatForm');
+let divChat = document.querySelector('.room');
+divChat.scrollTo(0,divChat.scrollHeight);
 function allwork() {
   const dataMessage = {
     message : message.value
   }
   sendMassage(JSON.stringify(dataMessage),(err,response) =>{
+    console.log('sss');
     if (response.status ===200) {
-      location.reload();
+      showAllMessages((err,{ posts }) => {
+        if (posts) {
+          const room = document.querySelector('.room ul');
+          room.innerHTML = posts.reduce((acc, post)=>{
+            acc += `<li>${post.username } : ${post.message}</li>`;
+            return acc;
+          },'');
+          message.value ="";
+          divChat.scrollTo(0,divChat.scrollHeight);
+        }
+    });
     }
-  })
-  showMessage((err,response)=>{
-    location.reload();
-  })
+    // location.reload();
+  });
 }
-btn.addEventListener('click', event => {
+chatForm.addEventListener('submit', event => {
+  event.preventDefault();
   allwork();
 });
-function pressEnter() {
-  if(event.keyCode == 13 ){
-    allwork();
-  }
-}

@@ -1,12 +1,13 @@
-const div = document.getElementById('paragraph');
+const paragraph = document.getElementById('paragraph');
 const btn = document.getElementById('btn');
 const username = document.getElementById('username');
 const password = document.getElementById('password');
+const loginForm = document.getElementById('loginForm');
 const p = document.createElement('p');
-function allwork() {
+function allworkLogin() {
   if ((username.value.trim() === '') || (password.value.trim() === '')) {
     p.textContent = 'Fill All inputs to login please!';
-    div.appendChild(p);
+    paragraph.appendChild(p);
   } else {
     username.value = username.value.trim();
     password.value = password.value.trim();
@@ -20,17 +21,13 @@ function allwork() {
       }
       else{
         p.textContent = 'username or password is False';
-        div.appendChild(p);
+        paragraph.appendChild(p);
       }
     });
     p.textContent = '';
   }
 }
-btn.addEventListener('click', event => {
-  allwork();
+loginForm.addEventListener('submit', event => {
+  event.preventDefault();
+  allworkLogin();
 });
-function pressEnter() {
-  if(event.keyCode == 13 ){
-    allwork();
-  }
-}

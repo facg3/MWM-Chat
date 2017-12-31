@@ -50,7 +50,6 @@ exports.getMessages = (req, res) => {
 
 exports.post = (req, res) => {
   const cookie = req.cookies.accessToken;
-
   const verifyCookie = jwt.verify(cookie, process.env.SECRET_COOKIE)
   const dataMessage = {
     message: req.body.message,
@@ -59,9 +58,9 @@ exports.post = (req, res) => {
   }
   queries.message(dataMessage, (err, result) => {
     if (err) {
-      console.log(err);
+      return console.log(err);
     }
-
+    res.send();
   });
 
 }
