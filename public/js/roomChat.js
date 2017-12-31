@@ -9,31 +9,32 @@ function sendMassage(message,cb) {
     credentials: 'include'
   })
   .then((response) => {
-     cb('/roomChat');
+     cb(null, response);
   })
   .catch( (err) => {
-    console.log(err);
+    cb(err)
   });
 
 }
 
-function showMessage(cb) {
-  fetch('/roomChat', {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    credentials: 'include'
-  })
-  .then((response) => {
-     cb(response);
-  })
-  .catch( (err) => {
-    console.log(err);
-  });
+  // function showMessage(cb) {
+  //   fetch('/roomChat', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     credentials: 'include'
+  //   })
+  //   .then((response) => {
+  //      cb(null, response);
+  //   })
+  //   .catch( (err) => {
+  //     cb(err);
+  //   });
+  //
+  // }
 
-}
 function showAllMessages(cb) {
   fetch('/messages', {
     method: 'GET',
@@ -51,7 +52,6 @@ function showAllMessages(cb) {
   .catch((err) => {
     cb(err)
   });
-
 }
 
 setInterval(()=>{
@@ -62,8 +62,6 @@ setInterval(()=>{
         acc += `<li>${post.username } : ${post.message}</li>`;
         return acc;
       },'');
-
-
     }
 });
 },3000);

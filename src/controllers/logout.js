@@ -1,4 +1,3 @@
-
 exports.get = (req, res) => {
   res.clearCookie('accessToken');
   res.writeHead(302, {

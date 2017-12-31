@@ -15,5 +15,4 @@ function login(data,cb) {
   .catch( (err) => {
     console.log(err);
   });
-
 }

@@ -1,11 +1,20 @@
 const queries = require('../database/queries');
 const jwt = require('jsonwebtoken')
 exports.get = (req, res) => {
-  res.render('login', {
-    activePage: {
-      login: true
+  const cookie =req.cookies.accessToken;
+  if(cookie){
+    const verifyCookie = jwt.verify(cookie, process.env.SECRET_COOKIE);
+    if(verifyCookie){
+      res.render('roomChat',{
+        activePage: {login: true}});
     }
-  });
+  }else {
+    res.render('login', {
+      activePage: {
+        login: true
+      }
+    });
+  }
 };
 exports.post = (req, res) => {
   const dataUser = req.body;
